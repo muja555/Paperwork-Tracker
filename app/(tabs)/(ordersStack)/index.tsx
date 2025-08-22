@@ -24,7 +24,7 @@ const EmptyOrders = () => {
         textStyle={styles.textStyle}
         btnStyle={styles.btnStyle}
         onPress={() => {
-          router.push('/CreateOrder');
+          router.navigate('/CreateOrder');
         }}
       />
     </View>

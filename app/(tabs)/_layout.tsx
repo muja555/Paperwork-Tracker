@@ -1,20 +1,20 @@
 import { Tabs } from 'expo-router';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { HapticTab } from '@/app/components/HapticTab';
+import Octicons from '@expo/vector-icons/Octicons';
+import TabBarBackground from '@/app/components/ui/TabBarBackground';
+import { Colors } from '@/app/constants/Colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { moderateScale, verticalScale } from '@/app/utils/Dimensions';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors.light.tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -25,21 +25,39 @@ export default function TabLayout() {
           },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="(ordersStack)"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'تقعيبات',
+          tabBarLabelStyle: styles.tabBarLabelStyle,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              size={28}
+              name="file-document-multiple-outline"
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'حسابي',
+          tabBarLabelStyle: styles.tabBarLabelStyle,
+          tabBarIcon: ({ color }) => (
+            <Octicons size={28} name="person" color={color} />
+          ),
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBarLabelStyle: {
+    marginTop: verticalScale(5),
+    fontSize: moderateScale(15),
+  },
+});

@@ -2,13 +2,15 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 interface IProps {
+  height?: number;
+  width?: number;
 }
 
-const Space = (props: IProps) => {
-    return (
-        <View></View>
-    );
-}
+const Space = ({ height, width }: IProps) => {
+  return (
+    <View style={[height ? { height } : null, width ? { width } : null]} />
+  );
+};
 
 export default Space;
 
